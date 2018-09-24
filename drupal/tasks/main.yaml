@@ -1,0 +1,22 @@
+---
+
+- name: Clone Drupal
+  git: 
+    repo=http://git.drupal.org/project/drupal.git
+    dest=/var/www/html/
+    update=no
+
+- name: Copy settings.php file 
+  template: src=settings.php dest=/var/www/html/sites/default/
+
+- name: Create services.yml
+  command: cp /var/www/html/sites/default/default.services.yml /var/www/html/sites/default/services.yml
+
+- name: Update permissions of services.yml
+  file: path=/var/www/html/sites/default/services.yml mode=777
+
+- name: Update permissions of files directory
+  file: dest=/var/www/html owner=www-data group=www-data mode=u=rwX,g=rX,o=rX recurse=yes
+
+- name: run install composer for drupal package download
+  shell: cd /var/www/html/ && composer install

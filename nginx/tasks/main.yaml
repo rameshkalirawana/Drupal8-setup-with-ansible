@@ -1,0 +1,12 @@
+---
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+    
+    - name: create /var/www/ directory
+      file: dest=/var/www/html state=directory owner=www-data group=www-data mode=0755
+
+   
+    - name: Configure nginx
+      template: src=default dest=/etc/nginx/sites-available/default
+      notify:
+             - restart nginx

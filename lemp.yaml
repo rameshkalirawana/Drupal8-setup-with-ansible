@@ -1,0 +1,9 @@
+---
+- hosts: webserver
+  become: yes
+  gather_facts: yes
+  roles:
+    - mysql
+    - nginx
+    - php
+    - drupal

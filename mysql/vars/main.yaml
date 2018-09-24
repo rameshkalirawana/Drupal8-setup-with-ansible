@@ -1,0 +1,5 @@
+---
+mysql_root_pass: mypassword #MySQL Root Password
+db_name: drupal
+db_user: drupal_user
+db_password: ramesh123
